@@ -6,6 +6,8 @@ import org.hibernate.annotations.Nationalized;
 import javax.persistence.*;
 import java.util.List;
 
+import static java.util.Collections.emptyList;
+
 @Entity
 public class Customer {
 
@@ -23,7 +25,13 @@ public class Customer {
     private String notes;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "owner", cascade = CascadeType.ALL)
-    private List<Pet> pets;
+    private List<Pet> pets = emptyList();
+
+    public Customer(String name, String phoneNumber, String notes) {
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.notes = notes;
+    }
 
     public Long getId() {
         return id;

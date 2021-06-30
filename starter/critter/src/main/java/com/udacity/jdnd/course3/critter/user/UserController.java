@@ -1,11 +1,14 @@
 package com.udacity.jdnd.course3.critter.user;
 
+import com.udacity.jdnd.course3.critter.pet.Pet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.DayOfWeek;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Handles web requests related to Users.
@@ -22,12 +25,32 @@ public class UserController {
 
     @PostMapping("/customer")
     public CustomerDTO saveCustomer(@RequestBody CustomerDTO customerDTO){
-
+        Long id = costumerService.saveCustomer(
+                new Customer(customerDTO.getName(),
+                        customerDTO.getPhoneNumber(),
+                        customerDTO.getNotes()
+                )
+        );
+        customerDTO.setId(id);
+        return customerDTO;
     }
 
     @GetMapping("/customer")
     public List<CustomerDTO> getAllCustomers(){
-        throw new UnsupportedOperationException();
+        return costumerService.getAllCostumers()
+                .stream()
+                .map( customer ->
+                        new CustomerDTO(
+                                customer.getId(),
+                                customer.getName(),
+                                customer.getPhoneNumber(),
+                                customer.getNotes(),
+                                customer.getPets().stream().flatMap(Stream::ofNullable)
+                                        .map(Pet::getId)
+                                        .collect(Collectors.toList())
+
+                        )
+                ).collect(Collectors.toList());
     }
 
     @GetMapping("/customer/pet/{petId}")
