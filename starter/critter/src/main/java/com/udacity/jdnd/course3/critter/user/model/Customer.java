@@ -1,7 +1,6 @@
-package com.udacity.jdnd.course3.critter.user;
+package com.udacity.jdnd.course3.critter.user.model;
 
 import com.udacity.jdnd.course3.critter.pet.Pet;
-import org.hibernate.annotations.Nationalized;
 
 import javax.persistence.*;
 import java.util.List;
@@ -9,14 +8,7 @@ import java.util.List;
 import static java.util.Collections.emptyList;
 
 @Entity
-public class Customer {
-
-    @Id
-    @GeneratedValue
-    private Long id;
-
-    @Nationalized
-    private String name;
+public class Customer extends User{
 
     @Column(length = 50)
     private String phoneNumber;
@@ -27,26 +19,13 @@ public class Customer {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "owner", cascade = CascadeType.ALL)
     private List<Pet> pets = emptyList();
 
+    public Customer() {
+    }
+
     public Customer(String name, String phoneNumber, String notes) {
-        this.name = name;
+        super(name);
         this.phoneNumber = phoneNumber;
         this.notes = notes;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getPhoneNumber() {

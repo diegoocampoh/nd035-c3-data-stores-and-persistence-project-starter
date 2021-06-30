@@ -1,7 +1,11 @@
-package com.udacity.jdnd.course3.critter.user;
+package com.udacity.jdnd.course3.critter.user.dto;
+
+import com.udacity.jdnd.course3.critter.user.model.EmployeeSkill;
 
 import java.time.DayOfWeek;
 import java.util.Set;
+
+import static java.util.Collections.emptySet;
 
 /**
  * Represents the form that employee request and response data takes. Does not map
@@ -10,8 +14,18 @@ import java.util.Set;
 public class EmployeeDTO {
     private long id;
     private String name;
-    private Set<EmployeeSkill> skills;
-    private Set<DayOfWeek> daysAvailable;
+    private Set<EmployeeSkill> skills = emptySet();
+    private Set<DayOfWeek> daysAvailable = emptySet();
+
+    public EmployeeDTO() {
+    }
+
+    public EmployeeDTO(long id, String name, Set<EmployeeSkill> skills, Set<DayOfWeek> daysAvailable) {
+        this.id = id;
+        this.name = name;
+        this.skills = skills;
+        this.daysAvailable = daysAvailable;
+    }
 
     public long getId() {
         return id;

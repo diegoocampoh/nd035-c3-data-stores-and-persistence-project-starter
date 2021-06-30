@@ -1,10 +1,19 @@
 package com.udacity.jdnd.course3.critter.user;
 
 import com.udacity.jdnd.course3.critter.pet.Pet;
+import com.udacity.jdnd.course3.critter.user.dto.CustomerDTO;
+import com.udacity.jdnd.course3.critter.user.dto.EmployeeDTO;
+import com.udacity.jdnd.course3.critter.user.dto.EmployeeRequestDTO;
+import com.udacity.jdnd.course3.critter.user.model.Customer;
+import com.udacity.jdnd.course3.critter.user.model.Employee;
+import com.udacity.jdnd.course3.critter.user.model.EmployeeSkill;
+import com.udacity.jdnd.course3.critter.user.service.UserService;
+import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.DayOfWeek;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -21,11 +30,11 @@ import java.util.stream.Stream;
 public class UserController {
 
     @Autowired
-    private CustomerService costumerService;
+    private UserService userService;
 
     @PostMapping("/customer")
     public CustomerDTO saveCustomer(@RequestBody CustomerDTO customerDTO){
-        Long id = costumerService.saveCustomer(
+        val id = userService.saveCustomer(
                 new Customer(customerDTO.getName(),
                         customerDTO.getPhoneNumber(),
                         customerDTO.getNotes()
@@ -37,7 +46,7 @@ public class UserController {
 
     @GetMapping("/customer")
     public List<CustomerDTO> getAllCustomers(){
-        return costumerService.getAllCostumers()
+        return userService.getAllCostumers()
                 .stream()
                 .map( customer ->
                         new CustomerDTO(
@@ -60,12 +69,26 @@ public class UserController {
 
     @PostMapping("/employee")
     public EmployeeDTO saveEmployee(@RequestBody EmployeeDTO employeeDTO) {
-        throw new UnsupportedOperationException();
+        val id = userService.saveEmployee(
+                new Employee(
+                        employeeDTO.getName(),
+                        employeeDTO.getSkills(),
+                        employeeDTO.getDaysAvailable()
+                )
+        );
+        employeeDTO.setId(id);
+        return employeeDTO;
     }
 
     @PostMapping("/employee/{employeeId}")
     public EmployeeDTO getEmployee(@PathVariable long employeeId) {
-        throw new UnsupportedOperationException();
+        val employee = userService.findEmployeeById(employeeId);
+        return new EmployeeDTO(
+                employee.getId(),
+                employee.getName(),
+                new HashSet<EmployeeSkill>(employee.getSkills()),
+                new HashSet<DayOfWeek>(employee.getDaysAvailable())
+        );
     }
 
     @PutMapping("/employee/{employeeId}")
