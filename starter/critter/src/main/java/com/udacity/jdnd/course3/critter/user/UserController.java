@@ -86,14 +86,16 @@ public class UserController {
         return new EmployeeDTO(
                 employee.getId(),
                 employee.getName(),
-                new HashSet<EmployeeSkill>(employee.getSkills()),
-                new HashSet<DayOfWeek>(employee.getDaysAvailable())
+                new HashSet<>(employee.getSkills()),
+                new HashSet<>(employee.getDaysAvailable())
         );
     }
 
     @PutMapping("/employee/{employeeId}")
     public void setAvailability(@RequestBody Set<DayOfWeek> daysAvailable, @PathVariable long employeeId) {
-        throw new UnsupportedOperationException();
+        val employee = userService.findEmployeeById(employeeId);
+        employee.setDaysAvailable(daysAvailable);
+        userService.saveEmployee(employee);
     }
 
     @GetMapping("/employee/availability")
