@@ -26,6 +26,14 @@ public class Pet {
     @JoinColumn(name = "owner_id")
     private Customer owner;
 
+    public Pet(PetType type, String name, LocalDate birthDate, String notes, Customer owner) {
+        this.type = type;
+        this.name = name;
+        this.birthDate = birthDate;
+        this.notes = notes;
+        this.owner = owner;
+    }
+
     public Long getId() {
         return id;
     }

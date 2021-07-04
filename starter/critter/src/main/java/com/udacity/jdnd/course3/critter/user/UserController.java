@@ -48,23 +48,13 @@ public class UserController {
     public List<CustomerDTO> getAllCustomers(){
         return userService.getAllCostumers()
                 .stream()
-                .map( customer ->
-                        new CustomerDTO(
-                                customer.getId(),
-                                customer.getName(),
-                                customer.getPhoneNumber(),
-                                customer.getNotes(),
-                                customer.getPets().stream().flatMap(Stream::ofNullable)
-                                        .map(Pet::getId)
-                                        .collect(Collectors.toList())
-
-                        )
-                ).collect(Collectors.toList());
+                .map(CustomerDTO::fromCustomer)
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/customer/pet/{petId}")
     public CustomerDTO getOwnerByPet(@PathVariable long petId){
-        throw new UnsupportedOperationException();
+        return CustomerDTO.fromCustomer(userService.findCustomerByPetId(petId));
     }
 
     @PostMapping("/employee")

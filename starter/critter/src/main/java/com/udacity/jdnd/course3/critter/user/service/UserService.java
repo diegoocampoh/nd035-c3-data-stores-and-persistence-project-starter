@@ -40,6 +40,10 @@ public class UserService {
         return employeeRepository.findById(id).orElseThrow(UserNotFoundException::new);
     }
 
+    public Customer findCustomerById(Long id){
+        return customerRepository.findById(id).orElseThrow(UserNotFoundException::new);
+    }
+
     public List<Employee> findEmployeeBySkillAndSchedule(LocalDate date, Set<EmployeeSkill> skills){
         return employeeRepository
                 .findAllByDaysAvailableContaining(date.getDayOfWeek()).stream().filter( employee ->
@@ -47,6 +51,9 @@ public class UserService {
                 ).collect(Collectors.toList());
     }
 
+    public Customer findCustomerByPetId(Long petId){
+        return customerRepository.findAllByPetsId(petId);
+    }
 
 
 }

@@ -3,6 +3,7 @@ package com.udacity.jdnd.course3.critter.user.model;
 import com.udacity.jdnd.course3.critter.pet.Pet;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.Collections.emptyList;
@@ -17,7 +18,7 @@ public class Customer extends User{
     private String notes;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "owner", cascade = CascadeType.ALL)
-    private List<Pet> pets = emptyList();
+    private List<Pet> pets = new ArrayList<>();
 
     public Customer() {
     }
