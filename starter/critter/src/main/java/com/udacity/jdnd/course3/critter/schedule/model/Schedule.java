@@ -16,7 +16,7 @@ import static java.util.Collections.emptySet;
 public class Schedule {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

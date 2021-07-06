@@ -9,7 +9,7 @@ import java.time.LocalDate;
 public class Pet {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private PetType type;
@@ -32,6 +32,9 @@ public class Pet {
         this.birthDate = birthDate;
         this.notes = notes;
         this.owner = owner;
+    }
+
+    public Pet() {
     }
 
     public Long getId() {
