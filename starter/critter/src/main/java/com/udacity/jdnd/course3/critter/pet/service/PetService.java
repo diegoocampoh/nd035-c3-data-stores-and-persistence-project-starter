@@ -1,6 +1,6 @@
 package com.udacity.jdnd.course3.critter.pet.service;
 
-import com.udacity.jdnd.course3.critter.pet.Pet;
+import com.udacity.jdnd.course3.critter.pet.model.Pet;
 import com.udacity.jdnd.course3.critter.pet.exceptions.PetFoundException;
 import com.udacity.jdnd.course3.critter.pet.repository.PetRepository;
 import org.springframework.beans.factory.annotation.Autowired;

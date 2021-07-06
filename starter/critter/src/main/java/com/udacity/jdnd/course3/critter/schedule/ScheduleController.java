@@ -1,7 +1,7 @@
 package com.udacity.jdnd.course3.critter.schedule;
 
-import com.udacity.jdnd.course3.critter.pet.PetDTO;
 import com.udacity.jdnd.course3.critter.pet.service.PetService;
+import com.udacity.jdnd.course3.critter.schedule.model.Schedule;
 import com.udacity.jdnd.course3.critter.schedule.service.ScheduleService;
 import com.udacity.jdnd.course3.critter.user.service.UserService;
 import lombok.val;
@@ -58,16 +58,22 @@ public class ScheduleController {
 
     @GetMapping("/pet/{petId}")
     public List<ScheduleDTO> getScheduleForPet(@PathVariable long petId) {
-        throw new UnsupportedOperationException();
+        return scheduleService.getSchedulesForPetId(petId)
+                .stream().map(ScheduleDTO::fromSchedule)
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/employee/{employeeId}")
     public List<ScheduleDTO> getScheduleForEmployee(@PathVariable long employeeId) {
-        throw new UnsupportedOperationException();
+        return scheduleService.getSchedulesForEmployeeId(employeeId)
+                .stream().map(ScheduleDTO::fromSchedule)
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/customer/{customerId}")
     public List<ScheduleDTO> getScheduleForCustomer(@PathVariable long customerId) {
-        throw new UnsupportedOperationException();
+        return scheduleService.getSchedulesForCustomerId(customerId)
+                .stream().map(ScheduleDTO::fromSchedule)
+                .collect(Collectors.toList());
     }
 }

@@ -1,6 +1,6 @@
 package com.udacity.jdnd.course3.critter.user.dto;
 
-import com.udacity.jdnd.course3.critter.pet.Pet;
+import com.udacity.jdnd.course3.critter.pet.model.Pet;
 import com.udacity.jdnd.course3.critter.user.model.Customer;
 
 import java.util.Collection;

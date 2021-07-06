@@ -1,12 +1,10 @@
 package com.udacity.jdnd.course3.critter.user.model;
 
-import com.udacity.jdnd.course3.critter.pet.Pet;
+import com.udacity.jdnd.course3.critter.pet.model.Pet;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import static java.util.Collections.emptyList;
 
 @Entity
 public class Customer extends User{

@@ -1,12 +1,10 @@
 package com.udacity.jdnd.course3.critter.user;
 
-import com.udacity.jdnd.course3.critter.pet.Pet;
 import com.udacity.jdnd.course3.critter.user.dto.CustomerDTO;
 import com.udacity.jdnd.course3.critter.user.dto.EmployeeDTO;
 import com.udacity.jdnd.course3.critter.user.dto.EmployeeRequestDTO;
 import com.udacity.jdnd.course3.critter.user.model.Customer;
 import com.udacity.jdnd.course3.critter.user.model.Employee;
-import com.udacity.jdnd.course3.critter.user.model.EmployeeSkill;
 import com.udacity.jdnd.course3.critter.user.service.UserService;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +15,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Handles web requests related to Users.

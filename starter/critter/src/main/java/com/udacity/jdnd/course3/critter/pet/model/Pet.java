@@ -1,4 +1,4 @@
-package com.udacity.jdnd.course3.critter.pet;
+package com.udacity.jdnd.course3.critter.pet.model;
 
 import com.udacity.jdnd.course3.critter.user.model.Customer;
 
